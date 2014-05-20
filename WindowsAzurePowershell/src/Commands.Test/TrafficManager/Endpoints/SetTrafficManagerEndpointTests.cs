@@ -149,6 +149,14 @@ namespace Microsoft.WindowsAzure.Commands.Test.TrafficManager.Endpoints
         {
             // Setup
             ProfileWithDefinition original = GetProfileWithDefinition();
+            TrafficManagerEndpoint expectedEndpoint = new TrafficManagerEndpoint()
+            {
+                DomainName = DomainName,
+                Type = EndpointType.Any,
+                Status = EndpointStatus.Enabled,
+                Weight = Weight,
+                Location = Location
+            };
 
             cmdlet = new SetAzureTrafficManagerEndpoint
             {
@@ -174,11 +182,7 @@ namespace Microsoft.WindowsAzure.Commands.Test.TrafficManager.Endpoints
             Assert.IsNotNull(actual);
             Assert.IsTrue(actual.Endpoints.Any(e => e.DomainName == DomainName));
             TrafficManagerEndpoint newEndpoint = actual.Endpoints.First(e => e.DomainName == DomainName);
-
-            Assert.AreEqual(EndpointType.Any, newEndpoint.Type);
-            Assert.AreEqual(EndpointStatus.Enabled, newEndpoint.Status);
-            Assert.AreEqual(Weight, newEndpoint.Weight);
-            Assert.AreEqual(Location, newEndpoint.Location);
+            Assert.AreEqual(expectedEndpoint, newEndpoint);
         }
 
         /// <summary>

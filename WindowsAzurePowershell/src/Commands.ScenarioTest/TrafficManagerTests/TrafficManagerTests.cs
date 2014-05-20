@@ -19,6 +19,7 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest.TrafficManagerTests
     using Microsoft.WindowsAzure.Commands.ScenarioTest.Common;
 
     [TestClass]
+    [Ignore]
     public class TrafficManagerTests : WindowsAzurePowerShellCertificateTest
     {
         private string currentDirectory;
@@ -192,6 +193,15 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest.TrafficManagerTests
         [TestCategory(Category.All)]
         [TestCategory(Category.TrafficManager)]
         [TestCategory(Category.CheckIn)]
+        public void TestAddAzureTrafficManagerEndpointNoWeightLocation()
+        {
+            this.RunPowerShellTest("Test-AddAzureTrafficManagerEndpointNoWeightLocation");
+        }
+
+        [TestMethod]
+        [TestCategory(Category.All)]
+        [TestCategory(Category.TrafficManager)]
+        [TestCategory(Category.CheckIn)]
         public void TestRemoveAzureTrafficManagerEndpoint()
         {
             this.RunPowerShellTest("Test-RemoveAzureTrafficManagerEndpoint");
@@ -204,6 +214,15 @@ namespace Microsoft.WindowsAzure.Commands.ScenarioTest.TrafficManagerTests
         public void TestSetAzureTrafficManagerEndpoint()
         {
             this.RunPowerShellTest("Test-SetAzureTrafficManagerEndpoint");
+        }
+
+        [TestMethod]
+        [TestCategory(Category.All)]
+        [TestCategory(Category.TrafficManager)]
+        [TestCategory(Category.CheckIn)]
+        public void TestSetAzureTrafficManagerEndpointUpdateWeightLocation()
+        {
+            this.RunPowerShellTest("Test-SetAzureTrafficManagerEndpointUpdateWeightLocation");
         }
 
         [TestMethod]

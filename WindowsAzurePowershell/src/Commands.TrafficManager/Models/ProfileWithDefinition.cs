@@ -124,5 +124,39 @@ namespace Microsoft.WindowsAzure.Commands.TrafficManager.Models
             this.definition.Monitors.Add(monitor);
             this.definition.DnsOptions = new DefinitionDnsOptions();
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            ProfileWithDefinition profileWithDefinition = obj as ProfileWithDefinition;
+            if (profileWithDefinition == null)
+            {
+                return false;
+            }
+
+            return TimeToLiveInSeconds.Equals(profileWithDefinition.TimeToLiveInSeconds) &&
+                MonitorRelativePath != null ? MonitorRelativePath.Equals(profileWithDefinition.MonitorRelativePath) : true &&
+                   MonitorPort.Equals(profileWithDefinition.MonitorPort) &&
+                   MonitorProtocol.Equals(profileWithDefinition.MonitorProtocol) &&
+                   LoadBalancingMethod.Equals(profileWithDefinition.LoadBalancingMethod) &&
+                   Endpoints != null ? Endpoints.Equals(profileWithDefinition.Endpoints) : true &&
+                   MonitorStatus.Equals(profileWithDefinition.MonitorStatus);
+        }
+
+        public override int GetHashCode()
+        {
+            int result = TimeToLiveInSeconds.GetHashCode();
+            result = (result * 397) ^ (MonitorRelativePath != null ? MonitorRelativePath.GetHashCode() : 0);
+            result = (result * 397) ^ MonitorPort.GetHashCode();
+            result = (result * 397) ^ MonitorProtocol.GetHashCode();
+            result = (result * 397) ^ LoadBalancingMethod.GetHashCode();
+            result = (result * 397) ^ (Endpoints != null ? Endpoints.GetHashCode() : 0);
+            result = (result * 397) ^ MonitorStatus.GetHashCode();
+            return result;
+        }
     }
 }
