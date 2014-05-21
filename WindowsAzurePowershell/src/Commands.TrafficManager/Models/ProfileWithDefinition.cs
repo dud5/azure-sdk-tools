@@ -139,11 +139,15 @@ namespace Microsoft.WindowsAzure.Commands.TrafficManager.Models
             }
 
             return TimeToLiveInSeconds.Equals(profileWithDefinition.TimeToLiveInSeconds) &&
-                MonitorRelativePath != null ? MonitorRelativePath.Equals(profileWithDefinition.MonitorRelativePath) : true &&
+                   MonitorRelativePath != null ?
+                       MonitorRelativePath.Equals(profileWithDefinition.MonitorRelativePath) :
+                       profileWithDefinition.MonitorRelativePath == null &&
                    MonitorPort.Equals(profileWithDefinition.MonitorPort) &&
                    MonitorProtocol.Equals(profileWithDefinition.MonitorProtocol) &&
                    LoadBalancingMethod.Equals(profileWithDefinition.LoadBalancingMethod) &&
-                   Endpoints != null ? Endpoints.Equals(profileWithDefinition.Endpoints) : true &&
+                   Endpoints != null ?
+                       Endpoints.Equals(profileWithDefinition.Endpoints) :
+                       profileWithDefinition.Endpoints == null &&
                    MonitorStatus.Equals(profileWithDefinition.MonitorStatus);
         }
 

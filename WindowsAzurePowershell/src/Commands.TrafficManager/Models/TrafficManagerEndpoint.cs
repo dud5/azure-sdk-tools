@@ -50,8 +50,12 @@ namespace Microsoft.WindowsAzure.Commands.TrafficManager.Models
                 return false;
             }
 
-            return DomainName != null ? DomainName.Equals(endpoint.DomainName) : true &&
-                Location != null ? Location.Equals(endpoint.Location) :true &&
+            return DomainName != null ?
+                       DomainName.Equals(endpoint.DomainName) :
+                       endpoint.DomainName == null &&
+                   Location != null ?
+                       Location.Equals(endpoint.Location) :
+                       endpoint.Location == null &&
                    Type.Equals(endpoint.Type) &&
                    Status.Equals(endpoint.Status) &&
                    MonitorStatus.Equals(endpoint.MonitorStatus) &&
